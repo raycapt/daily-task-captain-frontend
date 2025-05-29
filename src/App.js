@@ -1,11 +1,23 @@
 
-import React from "react";
+import React, { useState } from "react";
+import Login from "./Login";
+import ChildDashboard from "./ChildDashboard";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  if (!user) {
+    return <Login onLogin={setUser} />;
+  }
+
+  if (user.role === "child") {
+    return <ChildDashboard user={user} />;
+  }
+
   return (
-    <div style={{ textAlign: "center", padding: "2rem" }}>
-      <h1>Welcome to Daily Task Captain</h1>
-      <p>This is the frontend placeholder. Integration coming next.</p>
+    <div style={{ padding: "2rem" }}>
+      <h2>Parent dashboard coming soon.</h2>
+      <button onClick={() => setUser(null)}>Log out</button>
     </div>
   );
 }
